@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>Employee Database</h1>
+        <table border="1">
+  
+        </table>
+    </body>
+    <script>
+        const getData = async () => {
+            console.log(getData);
+            const res = await fetch("http://localhost:3000");
+            const emp = await res.json();
+            console.log(emp)
+            let content=`
+            <th>Name</th>
+            <th>dob</th>
+            <th>age</th>
+            <th>mail-id</th>
+            <th>gender</th>
+            <th>qualification</th>
+            <th>mobile</th>
+            <th>Total years of Experience</th>`;
+            emp.forEach(e=> {
+                content+=`
+                <tr>
+                <td>${e.name}</td>
+                <td>${e.dob}</td>
+                <td>${new Date().getFullYear()-e.dob}</td>                
+                <td>${e.email}</td>
+                <td>${e.gender}</td>
+                <td>${e.qualification}</td>
+                <td>${e.mobile}</td>
+                <td>${e.pastexp+new Date().getFullYear()-e.doj}</td>
+            </tr>
+                `
+            });
+            const t=document.querySelector('table')
+            t.innerHTML+=content
+        };
+        getData()
+
+
+
+
+
+
+    </script>
+</html>
